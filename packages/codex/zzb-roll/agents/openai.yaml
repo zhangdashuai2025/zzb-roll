@@ -1,0 +1,6 @@
+interface:
+  display_name: "zzb-roll · Remotion 口播动效"
+  short_description: "按 SRT 提炼重点，设计半透明 B-roll，先审核预览再导出"
+  default_prompt: "使用 $zzb-roll，根据我提供的视频和 SRT 设计半透明卡片风格 B-roll；先给我审核分镜与可播放预览，不覆盖现有工程。弹出音效默认关闭。"
+policy:
+  allow_implicit_invocation: true

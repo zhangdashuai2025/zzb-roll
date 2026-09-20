@@ -1,34 +1,22 @@
-# zzb-roll
+# zzb-roll v1.1.0
 
-把口播视频和 SRT 变成可审核的 Remotion 重点动效：提炼短语 → 审核分镜 → 本地预览 → 确认后接入工程或导出。默认深色半透明卡片、白/蓝/黄文字；每段弹出音效默认关闭，也可单独开启和调音量。
+根据口播视频与 SRT 提炼重点，使用本地 Remotion 生成可审核、可预览、可导出的 B-roll 动效。现在分别提供 **Codex 版**与 **WorkBuddy 版**，请只下载与你使用的软件对应的 ZIP。
 
-这是 **Codex skill，不是视频生成软件**。安装后，Codex 会按流程使用本机 Remotion 工程编写动效。不会因为解压 ZIP 就自动得到成片；首次运行可能需要安装 Node/Remotion 依赖。Codex 推理可能联网，素材与渲染留在本地。
+## 下载
 
-## 零基础安装（Windows / macOS / Linux）
+| 使用软件 | 下载包 | 安装方式 |
+| --- | --- | --- |
+| OpenAI Codex | [下载 Codex 版](./zzb-roll-codex-v1.1.0.zip) | 解压后运行 `node install.mjs`，重启 Codex |
+| 腾讯 WorkBuddy | [下载 WorkBuddy 版](./zzb-roll-workbuddy-v1.1.0.zip) | WorkBuddy → 专家·技能·连接器 → 技能 → 添加技能 → 上传技能 |
 
-1. 安装 [Node.js LTS](https://nodejs.org/) 与 Codex，并确认终端中 `node --version` 有输出。
-2. 下载本仓库 ZIP 并解压，进入解压后的目录，运行 `node install.mjs`。不要只移动里面的 `SKILL.md`，要保留整个 `zzb-roll` 文件夹。
-3. 重启 Codex，在对话中输入下面的提示，把路径改成自己的：
+两个版本的核心流程一致：提供视频和 SRT → 审核重点分镜 → 生成 Remotion 预览 → 修改 → 导出合成 MP4 或透明 ProRes 4444 MOV。
 
-   > 使用 $zzb-roll。视频：`我的视频.mp4`；字幕：`我的字幕.srt`。请先提炼重点并给我审核分镜，再做可播放预览。不要覆盖现有工程，弹出音效默认关闭。
+Skill 不是独立的视频软件。主机需要获得素材和工作区权限，并能执行本地 Node/Remotion 工程。默认不逐句复刻字幕；每段弹出音效默认关闭，可独立开启和调整音量。
 
-4. 审核每条重点文案与时间。满意后回复“按这版生成预览”；预览通过后回复“应用到工程”或“导出合成 MP4 / 透明 MOV”。
+详细教程：
 
-已有 Remotion 编辑器的用户可直接把工程目录一并告诉 Codex。没有工程时，让 Codex 在你指定的目录创建独立 Remotion 工程。建议先用 10 秒素材试跑。
+- [Codex 版安装使用说明](docs/Codex版安装使用说明.md)
+- [WorkBuddy 版安装使用说明](docs/WorkBuddy版安装使用说明.md)
+- [飞书分享总说明](docs/飞书分享总说明.md)
 
-## 你会得到什么
-
-- 原字幕与提炼文案对照，可删改单条；不是逐句字幕烧录。
-- 每个重点有独立开始/结束时间、内容驱动的文字/数字/图表/卡片动画。
-- 预览通过后可导出带 A-roll 的 MP4，或只含 B-roll 的 ProRes 4444 透明 MOV；后者可导入剪映叠加。
-- 音效每段独立开关和音量，默认关闭；不影响 A-roll 原声。
-
-## 更新与故障
-
-- 更新技能：在新版解压目录运行 `node install.mjs --force`，安装器会先备份旧技能。
-- 提示“node 不是命令”：安装 Node.js LTS 后重新打开终端。
-- 不能预览视频：检查提供的是本机真实文件路径，且浏览器支持其编码；Windows 路径不能直接当浏览器 URL。
-- 没有 B-roll：先让 Codex 输出分镜，确认后再要求生成预览；skill 不会自动覆盖时间线。
-- 导出透明层有黑底：检查导出的是 ProRes 4444 MOV 和 Alpha，不是普通 MP4。
-
-技能文件在 [`zzb-roll/SKILL.md`](zzb-roll/SKILL.md)。给飞书分享的文案见 [`docs/飞书分享文案.md`](docs/飞书分享文案.md)。发布包不包含作者的视频、字幕或工程数据。
+发布包不包含作者的视频、字幕、API Key 或私有工程数据。
